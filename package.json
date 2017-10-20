@@ -1,10 +1,14 @@
 {
   "name": "vue-component-finder-loader",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": { 
+    "type" : "git",
+    "url" : "https://github.com/csonlai/vue-component-finder-loader.git"
   },
   "author": "csonlai",
   "license": "ISC",
