@@ -81,8 +81,6 @@ module.exports = function (content) {
     // 脚本路劲
     const scriptInfo = getPathAndIndex(tplContent, 'script');
 
-    console.log('start:' + filePath);
-
     // 外部模板
     if (templateInfo.path) {
         tplContent = fs.readFileSync(getAbsolutePath(filePath, templateInfo.path));
@@ -98,7 +96,6 @@ module.exports = function (content) {
 
         var parser = new htmlparser.Parser({
             onopentag (tagName, attr) {
-                console.log('open:' + tagName);
                 let lastStackNode = nodeStack[nodeStack.length - 1];
                 lastStartTagName = tagName;
                 var node = new Node({
@@ -154,8 +151,6 @@ module.exports = function (content) {
             onclosetag(tagName) {
                 var node = nodeStack.pop();
 
-                console.log('close:' + tagName);
-
                 if (htmlTagList.indexOf(tagName) > -1 || node === root) {
                   return;
                 }
@@ -201,8 +196,6 @@ module.exports = function (content) {
     } else {
       content = tplContent;
     }
-    console.log('end:' + filePath);
-    // fs.appendFileSync('test.txt', filePath + ':' + content + '\n');
 
     return content;
 }
