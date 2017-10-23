@@ -87,6 +87,7 @@ module.exports = function (content) {
     }
     // 模版内容
     tplContent = getTemplateContent(tplContent, tpl => {
+        tpl = tpl.replace(/\r/g, '');
         // 每行内容
         var tplLineArr = tpl.split('\n');
         var currentLineIndex = 0;
@@ -159,7 +160,7 @@ module.exports = function (content) {
                 var lastEndTag = lineContent.substr(tagRegLastIndex - 1, 3);
 
 
-                if (lastEndTag === '\/>' && tagName === lastStartTagName) {
+                if (tagName === lastStartTagName) {
                   node.attr['data-created-last-index'] = currentLineIndex;
                   return;
                 }
@@ -188,7 +189,10 @@ module.exports = function (content) {
         });
         parser.write(tpl);
         parser.end();
-        return root.toString();
+        if (root) {
+          return root.toString();
+        }
+        return '';
     });
 
     if (templateInfo.path) {
@@ -196,6 +200,5 @@ module.exports = function (content) {
     } else {
       content = tplContent;
     }
-
     return content;
 }
